@@ -1,12 +1,20 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { Icon, Button, Header, SearchBar } from '@rneui/themed';
+import { View, Text, ScrollView, ImageSourcePropType } from 'react-native';
+import { Button, Header, SearchBar } from '@rneui/themed';
 import { theme }  from '../theme'
+import Recipe from '../Recipe/Recipe';
+
+interface Meal {
+  strMeal: string,
+  idMeal: string,
+  strMealThumb: string,
+  strCategory: string,
+}
 
 const Home: React.FC = () => {
 
   const [search, setSearch] = React.useState<string>("");
-  const [meals, setMeals] = React.useState([])
+  const [meals, setMeals] = React.useState<Meal[]>([])
 
   const updateSearch = (search:string) => {
     setSearch(search);
@@ -62,9 +70,9 @@ const Home: React.FC = () => {
           onPress={onClick}
         />
         </View>
-      <ScrollView contentContainerStyle={{ alignItems: 'center', marginTop: theme.layout.margin.small }}>
+      <ScrollView contentContainerStyle={{ alignItems: 'center', marginTop: theme.layout.margin.small, gap: 20 }}>
         {meals.map((meal) => 
-          <Text style={{ fontSize: theme.typography.fontSizes.large, fontWeight: 'bold', marginTop: 20 }}>{meal.strMeal}</Text>
+          <Recipe key={meal.idMeal} name={meal.strMeal} img={{uri: meal.strMealThumb}} description={meal.strCategory} />
         )}
       </ScrollView>
     </View>

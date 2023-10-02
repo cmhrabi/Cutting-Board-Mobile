@@ -40,6 +40,18 @@ interface Colors {
     padding: Spacing;
     margin: Spacing;
   }
+
+  interface BorderRadius {
+    small: number,
+    medium: number,
+    large: number
+  };
+
+  export const borderRadius: BorderRadius = {
+    small: 5,
+    medium: 10,
+    large: 15,
+  };
   
   export const spacing: Spacing = {
     small: 8,
