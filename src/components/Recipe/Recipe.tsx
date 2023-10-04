@@ -16,7 +16,7 @@ const Recipe = ({
 }: RecipeProps) => {
     return(
         <View style={{ borderColor: theme.colors.primary, borderWidth: 1, borderRadius: borderRadius.medium, padding: theme.spacing.small, width: '65%' }} >
-            <Image source={img} alt={name} />
+            <Image style={{borderRadius: borderRadius.medium , width: '100%', height: 100}} source={img} alt={name} />
             <Text style={{ fontSize: typography.fontSizes.large, fontWeight: 'bold', marginTop: 20 }}>{name}</Text>
             <Text style={{ fontSize: typography.fontSizes.medium, marginTop: 20 }}>Category: {description}</Text>
         </View>

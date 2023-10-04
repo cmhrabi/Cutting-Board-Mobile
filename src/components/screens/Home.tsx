@@ -3,6 +3,7 @@ import { View, Text, ScrollView, ImageSourcePropType } from 'react-native';
 import { Button, Header, SearchBar } from '@rneui/themed';
 import { theme }  from '../theme'
 import Recipe from '../Recipe/Recipe';
+import en from '../../../en';
 
 interface Meal {
   strMeal: string,
@@ -18,7 +19,6 @@ const Home: React.FC = () => {
 
   const updateSearch = (search:string) => {
     setSearch(search);
-    console.log(search)
   };
 
   const fetchMeals = async (searchTerm: string) => {
@@ -30,12 +30,12 @@ const Home: React.FC = () => {
     }
     
     const data = await response.json()
+    console.log(data.meals[0].strMealThumb)
     return data.meals;
   };
 
   const onClick = async () => {
     const data = await fetchMeals(search)
-    console.log("clicked")
     setMeals(data)
   }
 
@@ -43,13 +43,13 @@ const Home: React.FC = () => {
     <View>
       <Header
         placement="center"
-        centerComponent={{ text: 'Home', style: { color: '#fff', fontSize: theme.typography.fontSizes.large, marginTop: theme.layout.margin.large } }}
+        centerComponent={{ text: en.header.title, style: { color: '#fff', fontSize: theme.typography.fontSizes.large, marginTop: theme.layout.margin.large } }}
         leftComponent={{ icon: 'home', color: '#fff', size: 24, style: {marginTop: theme.layout.margin.large} }}
         containerStyle={{ backgroundColor: theme.colors.primary, height: 100 }}
       />
 
       <View style={{ alignItems: 'center', marginTop: theme.layout.margin.small }}>
-        <Text style={{ fontSize: theme.typography.fontSizes.large, fontWeight: 'bold', marginTop: 20 }}>The Cutting Board Mobile</Text>
+        <Text style={{ fontSize: theme.typography.fontSizes.large, fontWeight: 'bold', marginTop: 20 }}>{en.home.title}</Text>
       </View>
       <View style={{ marginTop:theme.layout.margin.small, padding: theme.layout.padding.medium }}>
         <SearchBar
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
           onPress={onClick}
         />
         </View>
-      <ScrollView contentContainerStyle={{ alignItems: 'center', marginTop: theme.layout.margin.small, gap: 20 }}>
+      <ScrollView contentContainerStyle={{ overflow: 'scroll', alignItems: 'center', marginTop: theme.layout.margin.small, gap: 20 }}>
         {meals.map((meal) => 
           <Recipe key={meal.idMeal} name={meal.strMeal} img={{uri: meal.strMealThumb}} description={meal.strCategory} />
         )}
